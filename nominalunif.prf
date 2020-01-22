@@ -1,0 +1,1745 @@
+(|nominalunif|
+ (|alpha_eq_lst?_TCC1| 0
+  (|alpha_eq_lst?_TCC1-1| NIL 3756579150 ("" (SUBTYPE-TCC) NIL NIL) NIL NIL))
+ (|alpha_eq_lst?_TCC2| 0
+  (|alpha_eq_lst?_TCC2-1| NIL 3756579150 ("" (TERMINATION-TCC) NIL NIL) NIL
+   NIL))
+ (|alpha_eq_lst?_TCC3| 0
+  (|alpha_eq_lst?_TCC3-1| NIL 3756579150 ("" (SUBTYPE-TCC) NIL NIL) NIL NIL))
+ (|apply_sub_prb_lst_TCC1| 0
+  (|apply_sub_prb_lst_TCC1-1| NIL 3754037948 ("" (TCC)) NIL NIL))
+ (|apply_sub_lhs_prb_lst_TCC1| 0
+  (|apply_sub_lhs_prb_lst_TCC1-1| NIL 3788682815 ("" (SUBTYPE-TCC) NIL NIL) NIL
+   NIL))
+ (|vars_lst_TCC1| 0 (|vars_lst_TCC1-1| NIL 3754037948 ("" (TCC)) NIL NIL))
+ (|vars_lst_TCC2| 0 (|vars_lst_TCC2-1| NIL 3754037948 ("" (TCC)) NIL NIL))
+ (|vars_rhs_lst_TCC1| 0
+  (|vars_rhs_lst_TCC1-1| NIL 3788683997 ("" (SUBTYPE-TCC) NIL NIL) NIL NIL))
+ (|size_lst_TCC1| 0 (|size_lst_TCC1-1| NIL 3754204811 ("" (TCC)) NIL NIL))
+ (|fix_pnt2unif_prb_TCC1| 0
+  (|fix_pnt2unif_prb_TCC1-1| NIL 3754037948 ("" (TCC)) NIL NIL))
+ (|fix_pnt2unif_prb_TCC2| 0
+  (|fix_pnt2unif_prb_TCC2-1| NIL 3755267122 ("" (TERMINATION-TCC) NIL NIL) NIL
+   NIL))
+ (|fix_pnt2unif_prb_TCC3| 0
+  (|fix_pnt2unif_prb_TCC3-1| NIL 3755267122 ("" (SUBTYPE-TCC) NIL NIL) NIL
+   NIL))
+ (|vars_lst_append| 0
+  (|vars_lst_append-1| NIL 3755517172
+   ("" (INDUCT "unif_prb_lst1")
+    (("1" (SKEEP)
+      (("1" (EXPAND "append")
+        (("1" (GRIND)
+          (("1"
+            (LEMMA "extensionality"
+             ("a" "vars_lst(unif_prb_lst2)" "b"
+              "union(emptyset[variable], vars_lst(unif_prb_lst2))"))
+            (("1" (PROP)
+              (("1" (HIDE 2) (("1" (SKEEP) (("1" (GRIND) NIL NIL)) NIL)) NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL)
+     ("2" (SKEEP)
+      (("2" (SKEEP)
+        (("2" (EXPAND "vars_lst" 1 1)
+          (("2" (LIFT-IF)
+            (("2" (PROP)
+              (("1" (HIDE -2 1) (("1" (ASSERT) (("1" (GRIND) NIL NIL)) NIL))
+                NIL)
+               ("2" (HIDE 1)
+                (("2" (EXPAND "append" 1)
+                  (("2" (EXPAND "vars_lst" 1 2)
+                    (("2" (INST? -1)
+                      (("2" (REPLACE -1 1)
+                        (("2" (HIDE -1)
+                          (("2" (ASSERT)
+                            (("2" (GRIND)
+                              (("2" (GRIND)
+                                (("2"
+                                  (LEMMA "extensionality"
+                                   ("a"
+                                    "union(union(vars_lst(cons2_var), vars_lst(unif_prb_lst2)),
+            union(Vars(cons1_var`1), Vars(cons1_var`2)))"
+                                    "b" "union(union(vars_lst(cons2_var),
+                   union(Vars(cons1_var`1), Vars(cons1_var`2))),
+             vars_lst(unif_prb_lst2))"))
+                                  (("2" (PROP)
+                                    (("2" (HIDE 2)
+                                      (("2" (SKEEP) (("2" (GRIND) NIL NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|vars_lst_sub_subset| 0
+  (|vars_lst_sub_subset-1| NIL 3755522726
+   ("" (INDUCT "unif_prb_lst")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("unif_prb" "unif_prb_lst"))
+      (("2" (PROP)
+        (("2" (INDUCT "sigma")
+          (("1" (GRIND) NIL NIL)
+           ("2" (SKOLEM 1 ("cur_sub" "sub_lst"))
+            (("2" (PROP)
+              (("2" (EXPAND "subset?" 1)
+                (("2" (SKEEP)
+                  (("2" (EXPAND "member" 1)
+                    (("2" (EXPAND "union" 1)
+                      (("2" (PROP)
+                        (("2" (EXPAND "vars_range_sub" 1)
+                          (("2" (EXPAND "member" 1)
+                            (("2" (EXPAND "union" 1)
+                              (("2" (PROP)
+                                (("2" (EXPAND "vars_lst" 3)
+                                  (("2" (EXPAND "member" 3)
+                                    (("2" (EXPAND "union" 3)
+                                      (("2" (PROP)
+                                        (("2" (EXPAND "apply_sub_prb_lst" -2)
+                                          (("2" (REWRITE "vars_lst_append" -2)
+                                            (("2" (EXPAND "member" -2)
+                                              (("2" (EXPAND "union" -2)
+                                                (("2" (PROP)
+                                                  (("1" (EXPAND "vars_lst" -1)
+                                                    (("1" (EXPAND "member" -1)
+                                                      (("1" (EXPAND "union" -1)
+                                                        (("1" (PROP)
+                                                          (("1"
+                                                            (HIDE-ALL-BUT -1)
+                                                            (("1" (GRIND) NIL
+                                                              NIL))
+                                                            NIL)
+                                                           ("2"
+                                                            (EXPAND "member" 4)
+                                                            (("2" (PROP)
+                                                              (("2"
+                                                                (EXPAND
+                                                                 "member" -1)
+                                                                (("2" (PROP)
+                                                                  (("1"
+                                                                    (LEMMA
+                                                                     "member_var_term_sub")
+                                                                    (("1"
+                                                                      (INST -1
+                                                                       "x"
+                                                                       "cons(cur_sub, sub_lst)"
+                                                                       "unif_prb`1")
+                                                                      (("1"
+                                                                        (PROP)
+                                                                        (("1"
+                                                                          (HIDE
+                                                                           -2
+                                                                           -3
+                                                                           -4 1
+                                                                           2 3
+                                                                           5)
+                                                                          (("1"
+                                                                            (ASSERT)
+                                                                            (("1"
+                                                                              (EXPAND
+                                                                               "member")
+                                                                              (("1"
+                                                                                (PROPAX)
+                                                                                NIL
+                                                                                NIL))
+                                                                              NIL))
+                                                                            NIL))
+                                                                          NIL)
+                                                                         ("2"
+                                                                          (HIDE
+                                                                           -2
+                                                                           -3
+                                                                           -4 3
+                                                                           4 5)
+                                                                          (("2"
+                                                                            (EXPAND
+                                                                             "vars_range_sub"
+                                                                             -1)
+                                                                            (("2"
+                                                                              (EXPAND
+                                                                               "member"
+                                                                               -1)
+                                                                              (("2"
+                                                                                (EXPAND
+                                                                                 "union"
+                                                                                 -1)
+                                                                                (("2"
+                                                                                  (ASSERT)
+                                                                                  NIL
+                                                                                  NIL))
+                                                                                NIL))
+                                                                              NIL))
+                                                                            NIL))
+                                                                          NIL)
+                                                                         ("3"
+                                                                          (EXPAND
+                                                                           "member"
+                                                                           1)
+                                                                          (("3"
+                                                                            (PROPAX)
+                                                                            NIL
+                                                                            NIL))
+                                                                          NIL))
+                                                                        NIL))
+                                                                      NIL))
+                                                                    NIL)
+                                                                   ("2"
+                                                                    (LEMMA
+                                                                     "member_var_term_sub")
+                                                                    (("2"
+                                                                      (INST -1
+                                                                       "x"
+                                                                       "cons(cur_sub, sub_lst)"
+                                                                       "unif_prb`2")
+                                                                      (("2"
+                                                                        (PROP)
+                                                                        (("1"
+                                                                          (EXPAND
+                                                                           "member"
+                                                                           -1)
+                                                                          (("1"
+                                                                            (PROPAX)
+                                                                            NIL
+                                                                            NIL))
+                                                                          NIL)
+                                                                         ("2"
+                                                                          (HIDE
+                                                                           -2
+                                                                           -3
+                                                                           -4 3
+                                                                           4 5)
+                                                                          (("2"
+                                                                            (EXPAND
+                                                                             "vars_range_sub"
+                                                                             -1)
+                                                                            (("2"
+                                                                              (EXPAND
+                                                                               "member"
+                                                                               -1)
+                                                                              (("2"
+                                                                                (EXPAND
+                                                                                 "union"
+                                                                                 -1)
+                                                                                (("2"
+                                                                                  (ASSERT)
+                                                                                  NIL
+                                                                                  NIL))
+                                                                                NIL))
+                                                                              NIL))
+                                                                            NIL))
+                                                                          NIL)
+                                                                         ("3"
+                                                                          (EXPAND
+                                                                           "member"
+                                                                           1)
+                                                                          (("3"
+                                                                            (PROPAX)
+                                                                            NIL
+                                                                            NIL))
+                                                                          NIL))
+                                                                        NIL))
+                                                                      NIL))
+                                                                    NIL))
+                                                                  NIL))
+                                                                NIL))
+                                                              NIL))
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL)
+                                                   ("2" (EXPAND "member" 4)
+                                                    (("2"
+                                                      (INST -3
+                                                       "cons(cur_sub, sub_lst)")
+                                                      (("2"
+                                                        (EXPAND "subset?" -3)
+                                                        (("2" (HIDE -2)
+                                                          (("2" (INST? -2)
+                                                            (("2" (PROP)
+                                                              (("2" (HIDE -2)
+                                                                (("2"
+                                                                  (EXPAND
+                                                                   "member" -1)
+                                                                  (("2"
+                                                                    (EXPAND
+                                                                     "union"
+                                                                     -1)
+                                                                    (("2"
+                                                                      (PROP)
+                                                                      (("2"
+                                                                        (HIDE 3
+                                                                         4 5)
+                                                                        (("2"
+                                                                          (EXPAND
+                                                                           "vars_range_sub"
+                                                                           -1)
+                                                                          (("2"
+                                                                            (EXPAND
+                                                                             "member"
+                                                                             -1)
+                                                                            (("2"
+                                                                              (EXPAND
+                                                                               "union"
+                                                                               -1)
+                                                                              (("2"
+                                                                                (ASSERT)
+                                                                                NIL
+                                                                                NIL))
+                                                                              NIL))
+                                                                            NIL))
+                                                                          NIL))
+                                                                        NIL))
+                                                                      NIL))
+                                                                    NIL))
+                                                                  NIL))
+                                                                NIL))
+                                                              NIL))
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|apply_sub_elim_var_term_aux| 0
+  (|apply_sub_elim_var_term_aux-1| NIL 3755937026
+   ("" (INDUCT "t")
+    (("1" (GRIND) NIL NIL)
+     ("2" (GRIND) (("2" (REWRITE "ext_preserves_Vars") NIL NIL)) NIL)
+     ("3" (GRIND) NIL NIL) ("4" (GRIND) NIL NIL) ("5" (GRIND) NIL NIL)
+     ("6" (GRIND) NIL NIL) ("7" (GRIND) NIL NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|apply_sub_elim_var_term| 0
+  (|apply_sub_elim_var_term-2| "o" 3755626127
+   ("" (INDUCT "sigma")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("sub_head" "sub_tail"))
+      (("2" (PROP)
+        (("2" (SKEEP)
+          (("2" (LEMMA "apply_sub_elim_var_term_aux")
+            (("2" (EXPAND "vars_dom_sub" -3)
+              (("2" (EXPAND "member" -3)
+                (("2" (EXPAND "union" -3)
+                  (("2" (PROP)
+                    (("1"
+                      (INST -2 "X" "sub_head`1" "sub_head`2"
+                       "Subs(sub_tail)(t)")
+                      (("1" (PROP)
+                        (("1" (HIDE -1 -2 2) (("1" (GRIND) NIL NIL)) NIL)
+                         ("2" (HIDE -2 -3 2) (("2" (GRIND) NIL NIL)) NIL)
+                         ("3" (HIDE -2 -3 -4) (("3" (GRIND) NIL NIL)) NIL))
+                        NIL))
+                      NIL)
+                     ("2" (HIDE -2)
+                      (("2" (INST -2 "X" "t")
+                        (("2" (PROP)
+                          (("1" (EXPAND "Subs" -2)
+                            (("1" (LEMMA "member_var_term_sub_aux")
+                              (("1"
+                                (INST -1 "X" "sub_head`1" "sub_head`2"
+                                 "Subs(sub_tail)(t)")
+                                (("1" (PROP)
+                                  (("1" (HIDE -2 -3 1) (("1" (GRIND) NIL NIL))
+                                    NIL)
+                                   ("2" (HIDE -1 2 3) (("2" (GRIND) NIL NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL)
+                           ("2" (HIDE -2 -3) (("2" (GRIND) NIL NIL)) NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK)
+  (|apply_sub_elim_var_term-1| NIL 3755608799
+   ("" (INDUCT "sigma")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("sub_head" "sub_tail"))
+      (("2" (PROP)
+        (("2" (INDUCT "t")
+          (("1" (POSTPONE) NIL NIL)
+           ("2" (SKOLEM 1 ("pm" "V"))
+            (("2" (SKEEP)
+              (("2" (INST? -3)
+                (("2" (INST? -3)
+                  (("2" (PROP)
+                    (("1" (EXPAND "Subs" -2)
+                      (("1" (EXPAND "subs" -2)
+                        (("1" (LIFT-IF)
+                          (("1" (PROP)
+                            (("1" (REWRITE "Subs_perm_comm")
+                              (("1" (REWRITE "ext_preserves_Vars")
+                                (("1" (REVEAL -1)
+                                  (("1" (INST -1 "sub_head`2")
+                                    (("1" (PROP)
+                                      (("1" (EXPAND "vars_dom_sub" -3)
+                                        (("1" (EXPAND "member" -3)
+                                          (("1" (EXPAND "union" -3)
+                                            (("1" (PROP)
+                                              (("1" (REPLACE -2 -1)
+                                                (("1" (HIDE -2)
+                                                  (("1" (ASSERT)
+                                                    (("1"
+                                                      (EXPAND "vars_range_sub")
+                                                      (("1" (POSTPONE) NIL
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL)
+                                       ("2" (POSTPONE) NIL NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL)
+                     ("2" (POSTPONE) NIL NIL) ("3" (POSTPONE) NIL NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL)
+           ("3" (POSTPONE) NIL NIL) ("4" (POSTPONE) NIL NIL)
+           ("5" (POSTPONE) NIL NIL) ("6" (POSTPONE) NIL NIL)
+           ("7" (POSTPONE) NIL NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|apply_sub_elim_var| 0
+  (|apply_sub_elim_var-1| NIL 3755529875
+   ("" (INDUCT "unif_prb_lst")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("un_prb_head" "un_prb_tail"))
+      (("2" (PROP)
+        (("2" (SKEEP)
+          (("2" (INST? -1)
+            (("2" (PROP)
+              (("2" (LEMMA "apply_sub_elim_var_term")
+                (("2" (EXPAND "apply_sub_prb_lst" -3)
+                  (("2" (EXPAND "append" -3)
+                    (("2" (EXPAND "append" -3)
+                      (("2" (EXPAND "vars_lst" -3)
+                        (("2" (INST -1 "X" "sigma" "un_prb_head`1")
+                          (("2" (LEMMA "apply_sub_elim_var_term")
+                            (("2" (INST -1 "X" "sigma" "un_prb_head`2")
+                              (("2" (GRIND) NIL NIL)) NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|apply_sub_prb_lst_append| 0
+  (|apply_sub_prb_lst_append-1| NIL 3756028853
+   (""
+    (MEASURE-INDUCT "length(unif_prb_lst1) + length(unif_prb_lst2)"
+     ("unif_prb_lst1" "unif_prb_lst2"))
+    (("" (SKEEP)
+      (("" (SKEEP)
+        (("" (CASE "null?(x_1)")
+          (("1" (HIDE -2) (("1" (GRIND) NIL NIL)) NIL)
+           ("2" (CASE "x_2 = null")
+            (("1" (GRIND) NIL NIL)
+             ("2" (EXPAND "apply_sub_prb_lst" 3 1)
+              (("2" (LIFT-IF)
+                (("2" (PROP)
+                  (("1" (GRIND) NIL NIL)
+                   ("2" (EXPAND "append" 2 4)
+                    (("2" (LIFT-IF)
+                      (("2" (PROP)
+                        (("2" (INST -1 "cdr(x_1)" "x_2")
+                          (("2" (GRIND) NIL NIL)) NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|apply_sub_lhs_prb_lst_append| 0
+  (|apply_sub_lhs_prb_lst_append-1| NIL 3788687970
+   (""
+    (MEASURE-INDUCT "length(unif_prb_lst1) + length(unif_prb_lst2)"
+     ("unif_prb_lst1" "unif_prb_lst2"))
+    (("" (SKEEP)
+      (("" (SKEEP)
+        (("" (CASE "null?(x_1)")
+          (("1" (HIDE -2) (("1" (GRIND) NIL NIL)) NIL)
+           ("2" (CASE "x_2 = null")
+            (("1" (GRIND) NIL NIL) ("2" (GRIND) NIL NIL)) NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   ((IMPLIES CONST-DECL "[bool, bool -> bool]" |booleans| NIL)
+    (|append| DEF-DECL "list[T]" |list_props| NIL)
+    (|apply_sub_lhs_prb_lst| DEF-DECL "list[unif_prb_typ]" |nominalunif| NIL)
+    (= CONST-DECL "[T, T -> boolean]" |equalities| NIL)
+    (|Sub| TYPE-EQ-DECL NIL |substitution| NIL)
+    (|wf_nat| FORMULA-DECL NIL |naturalnumbers| NIL)
+    (|nnint_plus_nnint_is_nnint| APPLICATION-JUDGEMENT "nonneg_int" |integers|
+     NIL)
+    (|measure_induction| FORMULA-DECL NIL |measure_induction| NIL)
+    (|number| NONEMPTY-TYPE-DECL NIL |numbers| NIL)
+    (|boolean| NONEMPTY-TYPE-DECL NIL |booleans| NIL)
+    (|number_field_pred| CONST-DECL "[number -> boolean]" |number_fields| NIL)
+    (|number_field| NONEMPTY-TYPE-FROM-DECL NIL |number_fields| NIL)
+    (|real_pred| CONST-DECL "[number_field -> boolean]" |reals| NIL)
+    (|real| NONEMPTY-TYPE-FROM-DECL NIL |reals| NIL)
+    (|rational_pred| CONST-DECL "[real -> boolean]" |rationals| NIL)
+    (|rational| NONEMPTY-TYPE-FROM-DECL NIL |rationals| NIL)
+    (|integer_pred| CONST-DECL "[rational -> boolean]" |integers| NIL)
+    (|int| NONEMPTY-TYPE-EQ-DECL NIL |integers| NIL)
+    (|bool| NONEMPTY-TYPE-EQ-DECL NIL |booleans| NIL)
+    (>= CONST-DECL "bool" |reals| NIL) (|atom| TYPE-EQ-DECL NIL |atoms| NIL)
+    (|list| TYPE-DECL NIL |list_adt| NIL) (|perm| TYPE-EQ-DECL NIL |atoms| NIL)
+    (|nat| NONEMPTY-TYPE-EQ-DECL NIL |naturalnumbers| NIL)
+    (|below| TYPE-EQ-DECL NIL |nat_types| NIL)
+    (|character| TYPE-DECL NIL |character_adt| NIL)
+    (|char?| ADT-RECOGNIZER-DECL "[character -> boolean]" |character_adt| NIL)
+    (|char| TYPE-EQ-DECL NIL |strings| NIL)
+    (|symbol| TYPE-EQ-DECL NIL |nominal_term| NIL)
+    (|commutative_symbol| TYPE-EQ-DECL NIL |nominal_term| NIL)
+    (|term| TYPE-DECL NIL |term_adt| NIL)
+    (PRED TYPE-EQ-DECL NIL |defined_types| NIL)
+    (AND CONST-DECL "[bool, bool -> bool]" |booleans| NIL)
+    (TRUE CONST-DECL "bool" |booleans| NIL)
+    (|variable| TYPE-EQ-DECL NIL |nominal_term| NIL)
+    (|unif_prb_typ| TYPE-EQ-DECL NIL |nominalunif| NIL)
+    (|naturalnumber| TYPE-EQ-DECL NIL |naturalnumbers| NIL)
+    (|numfield| NONEMPTY-TYPE-EQ-DECL NIL |number_fields| NIL)
+    (+ CONST-DECL "[numfield, numfield -> numfield]" |number_fields| NIL)
+    (|length| DEF-DECL "nat" |list_props| NIL)
+    (< CONST-DECL "bool" |reals| NIL)
+    (|well_founded?| CONST-DECL "bool" |orders| NIL)
+    (|pred| TYPE-EQ-DECL NIL |defined_types| NIL)
+    (|null| ADT-CONSTRUCTOR-DECL "(null?)" |list_adt| NIL)
+    (|real_lt_is_strict_total_order| NAME-JUDGEMENT
+     "(strict_total_order?[real])" |real_props| NIL)
+    (|posint_plus_nnint_is_posint| APPLICATION-JUDGEMENT "posint" |integers|
+     NIL)
+    (|cons?| ADT-RECOGNIZER-DECL "[list -> boolean]" |list_adt| NIL)
+    (|cdr| ADT-ACCESSOR-DECL "[(cons?) -> list]" |list_adt| NIL)
+    (|null?| ADT-RECOGNIZER-DECL "[list -> boolean]" |list_adt| NIL))
+   SHOSTAK))
+ (|alpha_eq_lst?_append| 0
+  (|alpha_eq_lst?_append-1| NIL 3755895817
+   ("" (INDUCT "unif_prb_lst1")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("unif_prb" "unif_prb_tail"))
+      (("2" (PROP) (("2" (SKEEP) (("2" (GRIND) NIL NIL)) NIL)) NIL)) NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|fix_pnt2unif_prb_append| 0
+  (|fix_pnt2unif_prb_append-1| NIL 3757338802
+   ("" (INDUCT "fix_pnt_eq_lst1")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("fix_pnt_eq" "fix_pnt_eq_tail"))
+      (("2" (PROP)
+        (("2" (SKEEP)
+          (("2" (EXPAND "fix_pnt2unif_prb" 1 1)
+            (("2" (LIFT-IF)
+              (("2" (PROP)
+                (("1" (HIDE -2 1) (("1" (GRIND) NIL NIL)) NIL)
+                 ("2" (HIDE 1)
+                  (("2" (ASSERT)
+                    (("2" (EXPAND "append" 1 1)
+                      (("2" (EXPAND "append" 1 1)
+                        (("2" (EXPAND "append" 1 1)
+                          (("2" (EXPAND "append" 1 1)
+                            (("2" (EXPAND "append" 1 1) (("2" (GRIND) NIL NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|apply_sub_prb_lst_cons_calls_aux| 0
+  (|apply_sub_prb_lst_cons_calls_aux-1| NIL 3756467155
+   ("" (SKEEP)
+    (("" (EXPAND "more_gen_sub?" -1)
+      (("" (SKEEP)
+        (("" (LEMMA "eq_sub_alpha")
+          ((""
+            (INST -1 "Nabla" "sigma" "Subs(sigma1)(s)"
+             "append(lambda1, sigma1)" "Subs(sigma1)(t)")
+            (("" (PROP)
+              (("" (REWRITE "Subs_append")
+                (("" (REWRITE "Subs_append")
+                  (("" (EXPAND "idempotent?" -3)
+                    (("" (PROP)
+                      (("" (INST -1 "t")
+                        (("" (REPLACE -1 -2 NIL T)
+                          (("" (REVEAL -2)
+                            (("" (INST -1 "s")
+                              (("" (REPLACE -1 -2 NIL T)
+                                (("" (HIDE -3)
+                                  (("" (LEMMA "eq_sub_alpha")
+                                    (("" (REWRITE "Subs_append" :DIR RL)
+                                      (("" (REWRITE "Subs_append" :DIR RL)
+                                        ((""
+                                          (INST -1 "Nabla"
+                                           "append(lambda1, sigma1)" "s"
+                                           "sigma" "t")
+                                          (("" (PROP)
+                                            (("" (HIDE -1 2)
+                                              (("" (SKEEP)
+                                                (("" (INST -1 "X")
+                                                  ((""
+                                                    (REWRITE "alpha_symmetric")
+                                                    NIL NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|apply_sub_prb_lst_cons_calls| 0
+  (|apply_sub_prb_lst_cons_calls-1| NIL 3756459711
+   ("" (INDUCT "unif_prb_lst")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("unif_prb_head" "unif_prb_tail"))
+      (("2" (PROP)
+        (("2" (SKEEP)
+          (("2" (EXPAND "apply_sub_prb_lst" 1)
+            (("2" (REWRITE "alpha_eq_lst?_append")
+              (("2" (PROP)
+                (("1" (HIDE -4)
+                  (("1" (HIDE -1)
+                    (("1" (LEMMA "apply_sub_prb_lst_cons_calls_aux")
+                      (("1" (REVEAL -2)
+                        (("1" (EXPAND "apply_sub_prb_lst" -1 2)
+                          (("1" (EXPAND "apply_sub_prb_lst" -1 1)
+                            (("1" (EXPAND "append" -1)
+                              (("1" (EXPAND "append" -1)
+                                (("1" (EXPAND "alpha_eq_lst?" -1)
+                                  (("1" (PROP)
+                                    (("1" (HIDE -2) (("1" (GRIND) NIL NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL)
+                 ("2" (GRIND) NIL NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|apply_sub_prb_lst_cons_calls_add_aux| 0
+  (|apply_sub_prb_lst_cons_calls_add_aux-1| NIL 3757774082
+   ("" (SKEEP)
+    (("" (EXPAND "more_gen_sub?" -1)
+      (("" (LEMMA "alpha_Subs_invariance")
+        (("" (HIDE -1)
+          (("" (SKEEP)
+            (("" (LEMMA "eq_sub_alpha")
+              ((""
+                (INST -1 "Nabla" "append(lambda1, sigma1)" "Subs(sigma1)(s)"
+                 "sigma" "Subs(sigma1)(t)")
+                (("" (PROP)
+                  (("1" (HIDE 2)
+                    (("1" (HIDE -1)
+                      (("1" (EXPAND "idempotent?" -1)
+                        (("1" (PROP)
+                          (("1" (REWRITE "Subs_append")
+                            (("1" (REWRITE "Subs_append")
+                              (("1" (INST-CP -1 "t")
+                                (("1" (INST -1 "s")
+                                  (("1" (REPLACE -1 1)
+                                    (("1" (REPLACE -2 1)
+                                      (("1" (HIDE -1 -2)
+                                        (("1" (REWRITE "Subs_append" :DIR RL)
+                                          (("1" (REWRITE "Subs_append" :DIR RL)
+                                            (("1" (REVEAL -4)
+                                              (("1" (REVEAL -5)
+                                                (("1"
+                                                  (INST -1 "Nabla" "sigma" "s"
+                                                   "append(lambda1, sigma1)"
+                                                   "t")
+                                                  (("1" (PROP) NIL NIL)) NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL)
+                   ("2" (HIDE -2 -3 2)
+                    (("2" (LEMMA "alpha_symmetric") (("2" (GRIND) NIL NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|apply_sub_prb_lst_cons_calls_add| 0
+  (|apply_sub_prb_lst_cons_calls_add-1| NIL 3757773458
+   ("" (INDUCT "unif_prb_lst")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("unif_prb_head" "unif_prb_tail"))
+      (("2" (PROP)
+        (("2" (SKEEP)
+          (("2" (EXPAND "apply_sub_prb_lst" 1 2)
+            (("2" (REWRITE "apply_sub_prb_lst_append")
+              (("2" (REWRITE "alpha_eq_lst?_append")
+                (("2" (PROP)
+                  (("1" (HIDE -1 -4)
+                    (("1" (EXPAND "apply_sub_prb_lst" 1)
+                      (("1" (EXPAND "apply_sub_prb_lst" 1)
+                        (("1" (REWRITE "append_null")
+                          (("1" (EXPAND "alpha_eq_lst?")
+                            (("1" (PROP)
+                              (("1" (EXPAND "alpha_eq_lst?")
+                                (("1" (PROPAX) NIL NIL)) NIL)
+                               ("2"
+                                (LEMMA "apply_sub_prb_lst_cons_calls_add_aux")
+                                (("2" (INST? -1)
+                                  (("2" (PROP)
+                                    (("2" (HIDE 2)
+                                      (("2" (HIDE -1 -2)
+                                        (("2" (REVEAL -5)
+                                          (("2" (EXPAND "apply_sub_prb_lst" -1)
+                                            (("2"
+                                              (REWRITE "alpha_eq_lst?_append")
+                                              (("2" (PROP)
+                                                (("2" (HIDE -2)
+                                                  (("2" (GRIND) NIL NIL)) NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL)
+                   ("2" (EXPAND "apply_sub_prb_lst" -4)
+                    (("2" (REWRITE "alpha_eq_lst?_append")
+                      (("2" (PROP)
+                        (("2" (HIDE -4) (("2" (GRIND) NIL NIL)) NIL)) NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|cdr_smaller_size| 0
+  (|cdr_smaller_size-1| NIL 3755538229
+   ("" (SKEEP)
+    (("" (EXPAND "size_lst" 2 2)
+      (("" (LIFT-IF)
+        (("" (PROP)
+          (("" (HIDE 1 3)
+            (("" (LEMMA "size_gt_1")
+              (("" (INST? -1) (("" (GRIND) NIL NIL)) NIL)) NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|c_match_TCC1| 0
+  (|c_match_TCC1-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|c_match_TCC2| 0
+  (|c_match_TCC2-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|c_match_TCC3| 0
+  (|c_match_TCC3-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|c_match_TCC4| 0
+  (|c_match_TCC4-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|c_match_TCC5| 0
+  (|c_match_TCC5-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|c_match_TCC6| 0
+  (|c_match_TCC6-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|c_match_TCC7| 0
+  (|c_match_TCC7-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|c_match_TCC8| 0
+  (|c_match_TCC8-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|c_match_TCC9| 0
+  (|c_match_TCC9-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|c_match_TCC10| 0
+  (|c_match_TCC10-1| NIL 3788680587 ("" (TERMINATION-TCC) NIL NIL) NIL NIL))
+ (|fresh_subs_subset| 0
+  (|fresh_subs_subset-1| NIL 3754230260
+   ("" (INDUCT "Nabla1")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM!)
+      (("2" (PROP)
+        (("2" (INDUCT "Nabla")
+          (("1" (SKOLEM!)
+            (("1" (PROP)
+              (("1" (HIDE-ALL-BUT -1)
+                (("1" (INST -1 "cons1_var!1`1" "cons1_var!1`2")
+                  (("1" (GRIND) NIL NIL)) NIL))
+                NIL))
+              NIL))
+            NIL)
+           ("2" (SKOLEM!)
+            (("2" (PROP)
+              (("2" (SKOLEM!)
+                (("2" (PROP)
+                  (("2" (EXPAND "fresh_subs" 1)
+                    (("2" (PROP)
+                      (("1" (LEMMA "fresh_subs_character")
+                        (("1" (HIDE -2 -4)
+                          (("1" (INST -2 "cons1_var!1`1" "cons1_var!1`2")
+                            (("1" (PROP)
+                              (("1" (INST? -3)
+                                (("1" (REPLACE -2)
+                                  (("1"
+                                    (INST -3 "(cons1_var!1`1, cons1_var!1`2)")
+                                    (("1" (PROP) NIL NIL)) NIL))
+                                  NIL))
+                                NIL)
+                               ("2" (HIDE -1 2) (("2" (GRIND) NIL NIL)) NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL)
+                       ("2"
+                        (INST -3 "sigma!1" "Delta!1"
+                         "cons(cons1_var!2, cons2_var!2)")
+                        (("2" (SPLIT -3)
+                          (("1" (PROPAX) NIL NIL)
+                           ("2" (HIDE 2)
+                            (("2" (SKOLEM!)
+                              (("2" (PROP)
+                                (("1" (INST? -3)
+                                  (("1" (ASSERT)
+                                    (("1" (HIDE -2 1) (("1" (GRIND) NIL NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL)
+                                 ("2" (INST? -3)
+                                  (("2" (PROP)
+                                    (("2" (HIDE -2 2) (("2" (GRIND) NIL NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|suf_cond_not_prb_lst_aux| 0
+  (|suf_cond_not_prb_lst_aux-1| NIL 3757083637
+   ("" (INDUCT "s")
+    (("1" (SKEEP)
+      (("1" (SKEEP)
+        (("1" (HIDE-ALL-BUT -2)
+          (("1" (REWRITE "Subs_atom") (("1" (GRIND) NIL NIL)) NIL)) NIL))
+        NIL))
+      NIL)
+     ("2" (SKOLEM 1 ("pm" "V"))
+      (("2" (SKEEP)
+        (("2" (REPLACE -1 -2)
+          (("2" (EXPAND "Subs" -2)
+            (("2" (EXPAND "Subs" -2)
+              (("2" (EXPAND "subs" -2)
+                (("2" (LIFT-IF)
+                  (("2" (PROP)
+                    (("1" (REWRITE "ext_preserves_Vars") NIL NIL)
+                     ("2" (HIDE -2 2) (("2" (GRIND) NIL NIL)) NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL)
+     ("3" (SKEEP)
+      (("3" (HIDE-ALL-BUT -2)
+        (("3" (REWRITE "Subs_unit") (("3" (GRIND) NIL NIL)) NIL)) NIL))
+      NIL)
+     ("4" (SKOLEM 1 ("p1" "p2"))
+      (("4" (PROP)
+        (("4" (SKEEP) (("4" (REWRITE "Subs_pair") (("4" (GRIND) NIL NIL)) NIL))
+          NIL))
+        NIL))
+      NIL)
+     ("5" (SKEEP)
+      (("5" (SKEEP) (("5" (REWRITE "Subs_abs") (("5" (GRIND) NIL NIL)) NIL))
+        NIL))
+      NIL)
+     ("6" (SKOLEM 1 ("f" "ag"))
+      (("6" (PROP) (("6" (SKEEP) (("6" (GRIND) NIL NIL)) NIL)) NIL)) NIL)
+     ("7" (SKOLEM 1 ("f" "ag"))
+      (("7" (PROP)
+        (("7" (SKEEP)
+          (("7" (CASE "ag = pair(term1(ag), term2(ag))")
+            (("1" (REPLACE -1 -4)
+              (("1" (REWRITE "Subs_c_app")
+                (("1" (REPLACE -1 -4 RL) (("1" (GRIND) NIL NIL)) NIL)) NIL))
+              NIL)
+             ("2" (HIDE-ALL-BUT 1)
+              (("2" (TYPEPRED "ag")
+                (("2" (HIDE -1)
+                  (("2" (LEMMA "term_pair_eta")
+                    (("2" (INST -1 "ag") (("2" (ASSERT) NIL NIL)) NIL)) NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|suf_cond_not_prb_lst| 0
+  (|suf_cond_not_prb_lst-1| NIL 3757082893
+   ("" (INDUCT "unif_prb_lst")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("unif_prb" "unif_prb_tail"))
+      (("2" (PROP)
+        (("2" (SKEEP)
+          (("2" (EXPAND "apply_sub_prb_lst" -3)
+            (("2" (REWRITE "vars_lst_append")
+              (("2" (EXPAND "member" -3)
+                (("2" (EXPAND "union" -3)
+                  (("2" (PROP)
+                    (("1" (EXPAND "vars_lst" -1)
+                      (("1" (EXPAND "member" -1)
+                        (("1" (EXPAND "union" -1)
+                          (("1" (PROP)
+                            (("1" (HIDE-ALL-BUT -1) (("1" (GRIND) NIL NIL))
+                              NIL)
+                             ("2" (EXPAND "member" -1)
+                              (("2" (HIDE -2)
+                                (("2" (LEMMA "suf_cond_not_prb_lst_aux")
+                                  (("2" (PROP)
+                                    (("1" (INST? -2)
+                                      (("1" (INST? -2) (("1" (GRIND) NIL NIL))
+                                        NIL))
+                                      NIL)
+                                     ("2" (INST? -2)
+                                      (("2" (INST? -2) (("2" (GRIND) NIL NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL)
+                     ("2" (INST? -2) (("2" (GRIND) NIL NIL)) NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|suf_cond_member_unif_prb_lst| 0
+  (|suf_cond_member_unif_prb_lst-1| NIL 3757159704
+   ("" (INDUCT "unif_prb_lst")
+    (("1" (GRIND) NIL NIL)
+     ("2" (SKOLEM 1 ("unif_prb" "unif_prb_tail"))
+      (("2" (PROP)
+        (("2" (SKEEP)
+          (("2" (EXPAND "apply_sub_prb_lst" -2)
+            (("2" (REWRITE "vars_lst_append")
+              (("2" (EXPAND "member" -2)
+                (("2" (EXPAND "union" -2)
+                  (("2" (PROP)
+                    (("1" (HIDE -2)
+                      (("1" (EXPAND "vars_lst" -1)
+                        (("1" (EXPAND "member" -1)
+                          (("1" (EXPAND "union" -1)
+                            (("1" (PROP)
+                              (("1" (HIDE 1 2) (("1" (GRIND) NIL NIL)) NIL)
+                               ("2" (LEMMA "member_var_term_sub")
+                                (("2" (EXPAND "vars_lst" 2)
+                                  (("2" (EXPAND "member" 2)
+                                    (("2" (EXPAND "union" 2)
+                                      (("2" (PROP)
+                                        (("2" (HIDE 2) (("2" (GRIND) NIL NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL))
+                      NIL)
+                     ("2" (GRIND) NIL NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|valid_quadruple?_cdr| 0
+  (|valid_quadruple?_cdr-1| NIL 3757339218
+   ("" (SKEEP)
+    (("" (EXPAND "valid_quadruple?") (("" (PROP) (("" (GRIND) NIL NIL)) NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK))
+ (|c_match_sound| 0
+  (|c_match_sound-1| NIL 3788680760
+   (""
+    (MEASURE-INDUCT+
+     "lex2(card(vars_lst(append(unif_prb_lst, fix_pnt2unif_prb(fix_pnt_eq_lst)))), size_lst(unif_prb_lst))"
+     ("unif_prb_lst" "fix_pnt_eq_lst"))
+    (("" (HIDE -1)
+      (("" (SKEEP)
+        (("" (EXPAND "c_match")
+          (("" (LIFT-IF)
+            (("" (SPLIT)
+              (("1" (PROP)
+                (("1" (HIDE -4)
+                  (("1" (EXPAND "member" -2)
+                    (("1" (PROP)
+                      (("1" (REPLACE -1 1 RL)
+                        (("1" (REPLACE -2 1 RL)
+                          (("1" (REPLACE -3 1 RL)
+                            (("1" (HIDE -1 -2 -3) (("1" (ASSERT) NIL NIL))
+                              NIL))
+                            NIL))
+                          NIL))
+                        NIL)
+                       ("2" (HIDE-ALL-BUT -1) (("2" (GRIND) NIL NIL)) NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL)
+               ("2" (FLATTEN)
+                (("2" (SPLIT)
+                  (("1" (NAME-REPLACE "t_alg" "car(x!1)`1")
+                    (("1" (NAME-REPLACE "s_alg" "car(x!1)`2")
+                      (("1" (PROP)
+                        (("1" (REVEAL -3)
+                          (("1" (INST -1 "cdr(x!1)" "x!2")
+                            (("1"
+                              (INST -1 "Delta" "Nabla" "sigma" "sigma1"
+                               "Delta_sol" "sigma_sol" "fix_pnt_eq_lst_sol")
+                              (("1" (PROP)
+                                (("1" (HIDE -3 -5)
+                                  (("1" (EXPAND "sol_prb_quad?" 2)
+                                    (("1" (EXPAND "sol_prb_quad?" -1)
+                                      (("1" (ASSERT)
+                                        (("1" (PROP)
+                                          (("1" (HIDE -1 -3 -4 -5)
+                                            (("1" (EXPAND "alpha_eq_lst?" 1)
+                                              (("1" (ASSERT)
+                                                (("1" (PROP)
+                                                  (("1"
+                                                    (EXPAND
+                                                     "apply_sub_lhs_prb_lst" 1)
+                                                    (("1" (ASSERT)
+                                                      (("1" (EXPAND "append" 1)
+                                                        (("1"
+                                                          (EXPAND "append" 1)
+                                                          (("1" (PROPAX) NIL
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL)
+                                                   ("2"
+                                                    (EXPAND
+                                                     "apply_sub_lhs_prb_lst" 1)
+                                                    (("2" (EXPAND "append" 1)
+                                                      (("2" (REVEAL -8 -9)
+                                                        (("2" (REPLACE -1 1)
+                                                          (("2" (REPLACE -2 1)
+                                                            (("2" (HIDE -1 -2)
+                                                              (("2"
+                                                                (LEMMA
+                                                                 "term_at_eta")
+                                                                (("2"
+                                                                  (INST -1
+                                                                   "t_alg")
+                                                                  (("2"
+                                                                    (REPLACE -1
+                                                                             1
+                                                                             RL)
+                                                                    (("2"
+                                                                      (REWRITE
+                                                                       "Subs_atom")
+                                                                      (("2"
+                                                                        (REPLACE
+                                                                         -3 1)
+                                                                        (("2"
+                                                                          (EXPAND
+                                                                           "alpha"
+                                                                           1)
+                                                                          (("2"
+                                                                            (PROPAX)
+                                                                            NIL
+                                                                            NIL))
+                                                                          NIL))
+                                                                        NIL))
+                                                                      NIL))
+                                                                    NIL))
+                                                                  NIL))
+                                                                NIL))
+                                                              NIL))
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL)
+                                           ("2" (HIDE -1 -2 -3 -4)
+                                            (("2" (EXPAND "vars_rhs_lst" 1)
+                                              (("2" (LIFT-IF)
+                                                (("2" (PROP)
+                                                  (("1"
+                                                    (LEMMA
+                                                     "null_append[unif_prb_typ]")
+                                                    (("1" (INST? -1)
+                                                      (("1" (ASSERT) NIL NIL))
+                                                      NIL))
+                                                    NIL)
+                                                   ("2" (EXPAND "append" 2 1)
+                                                    (("2" (EXPAND "append" 2 2)
+                                                      (("2" (REVEAL -8)
+                                                        (("2" (EXPAND "Vars" 2)
+                                                          (("2" (ASSERT)
+                                                            (("2"
+                                                              (REWRITE
+                                                               "union_empty")
+                                                              NIL NIL))
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL)
+                                 ("2" (REWRITE "valid_quadruple?_cdr") NIL NIL)
+                                 ("3" (HIDE 3 -2 -3 -4 -5)
+                                  (("3" (REWRITE "lex2_lt")
+                                    (("3" (FLATTEN)
+                                      (("3" (HIDE 1)
+                                        (("3" (REVEAL -2 -6 -7)
+                                          (("3" (PROP)
+                                            (("1" (EXPAND "vars_lst" 1 2)
+                                              (("1" (LIFT-IF)
+                                                (("1" (PROP)
+                                                  (("1"
+                                                    (LEMMA
+                                                     "null_append[unif_prb_typ]")
+                                                    (("1" (INST? -1)
+                                                      (("1" (ASSERT) NIL NIL))
+                                                      NIL))
+                                                    NIL)
+                                                   ("2" (HIDE 1)
+                                                    (("2" (EXPAND "append" 1 3)
+                                                      (("2" (ASSERT)
+                                                        (("2"
+                                                          (EXPAND "append" 1 3)
+                                                          (("2" (ASSERT)
+                                                            (("2"
+                                                              (EXPAND "Vars" 1)
+                                                              (("2"
+                                                                (REWRITE
+                                                                 "union_empty")
+                                                                (("2"
+                                                                  (REWRITE
+                                                                   "union_empty")
+                                                                  (("2"
+                                                                    (ASSERT)
+                                                                    (("2"
+                                                                      (EXPAND
+                                                                       "append"
+                                                                       1 2)
+                                                                      (("2"
+                                                                        (PROPAX)
+                                                                        NIL
+                                                                        NIL))
+                                                                      NIL))
+                                                                    NIL))
+                                                                  NIL))
+                                                                NIL))
+                                                              NIL))
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL)
+                                             ("2" (REWRITE "cdr_smaller_size")
+                                              NIL NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL))
+                                NIL))
+                              NIL))
+                            NIL))
+                          NIL)
+                         ("2" (HIDE-ALL-BUT -1)
+                          (("2" (EXPAND "member" -1) (("2" (PROPAX) NIL NIL))
+                            NIL))
+                          NIL))
+                        NIL)
+                       ("2" (HIDE -1 -2 -3 3) (("2" (GRIND) NIL NIL)) NIL))
+                      NIL))
+                    NIL)
+                   ("2" (FLATTEN)
+                    (("2" (HIDE 1)
+                      (("2" (SPLIT)
+                        (("1" (FLATTEN)
+                          (("1" (NAME-REPLACE "t_alg" "car(x!1)`1")
+                            (("1" (NAME-REPLACE "s_alg" "car(x!1)`2")
+                              (("1" (PROP)
+                                (("1" (ASSERT)
+                                  (("1" (LIFT-IF)
+                                    (("1" (PROP)
+                                      (("1"
+                                        (NAME-REPLACE "sigma1_alg"
+                                         "(: (V(t_alg), ext(reverse(p(t_alg)))(s_alg) ) :)")
+                                        (("1"
+                                          (NAME-REPLACE "new_sigma_alg"
+                                           "append(sigma1_alg, sigma)")
+                                          (("1"
+                                            (NAME-REPLACE "Delta1_alg"
+                                             "fresh_subs?(sigma1_alg, Delta)`1")
+                                            (("1"
+                                              (NAME-REPLACE "bool1_alg"
+                                               "fresh_subs?(sigma1_alg, Delta)`2")
+                                              (("1"
+                                                (NAME-REPLACE
+                                                 "unif_prb_lst1_alg"
+                                                 "apply_sub_prb_lst(sigma1_alg, cdr(x!1))")
+                                                (("1"
+                                                  (NAME-REPLACE
+                                                   "unif_prb_lst2_alg"
+                                                   "apply_sub_prb_lst(sigma1_alg, fix_pnt2unif_prb(x!2))")
+                                                  (("1"
+                                                    (NAME-REPLACE
+                                                     "new_Delta_alg"
+                                                     "append(Delta1_alg, Delta)")
+                                                    (("1"
+                                                      (NAME-REPLACE
+                                                       "new_unif_prb_lst_alg"
+                                                       "append(unif_prb_lst1_alg, unif_prb_lst2_alg)")
+                                                      (("1" (REVEAL -11)
+                                                        (("1"
+                                                          (INST -1
+                                                           "new_unif_prb_lst_alg"
+                                                           "(::)")
+                                                          (("1"
+                                                            (INST -1
+                                                             "new_Delta_alg"
+                                                             "Nabla"
+                                                             "new_sigma_alg"
+                                                             "sigma1"
+                                                             "Delta_sol"
+                                                             "sigma_sol"
+                                                             "fix_pnt_eq_lst_sol")
+                                                            (("1" (PROP)
+                                                              (("1"
+                                                                (HIDE -5 -2 -3)
+                                                                (("1"
+                                                                  (EXPAND
+                                                                   "sol_prb_quad?"
+                                                                   3)
+                                                                  (("1" (PROP)
+                                                                    (("1"
+                                                                      (EXPAND
+                                                                       "sol_prb_quad?"
+                                                                       -1)
+                                                                      (("1"
+                                                                        (PROP)
+                                                                        (("1"
+                                                                          (HIDE
+                                                                           -2
+                                                                           -3
+                                                                           -4
+                                                                           -5)
+                                                                          (("1"
+                                                                            (EXPAND
+                                                                             "new_Delta_alg")
+                                                                            (("1"
+                                                                              (REWRITE
+                                                                               "fresh_subs_append_context")
+                                                                              (("1"
+                                                                                (ASSERT)
+                                                                                NIL
+                                                                                NIL))
+                                                                              NIL))
+                                                                            NIL))
+                                                                          NIL))
+                                                                        NIL))
+                                                                      NIL)
+                                                                     ("2"
+                                                                      (EXPAND
+                                                                       "sol_prb_quad?"
+                                                                       -1)
+                                                                      (("2"
+                                                                        (PROP)
+                                                                        (("2"
+                                                                          (HIDE
+                                                                           -1
+                                                                           -3
+                                                                           -4
+                                                                           -5)
+                                                                          (("2"
+                                                                            (EXPAND
+                                                                             "new_unif_prb_lst_alg")
+                                                                            (("2"
+                                                                              (REWRITE
+                                                                               "apply_sub_lhs_prb_lst_append")
+                                                                              (("2"
+                                                                                (REWRITE
+                                                                                 "alpha_eq_lst?_append")
+                                                                                (("2"
+                                                                                  (PROP)
+                                                                                  (("2"
+                                                                                    (HIDE
+                                                                                     -2)
+                                                                                    (("2"
+                                                                                      (EXPAND
+                                                                                       "unif_prb_lst1_alg")
+                                                                                      (("2"
+                                                                                        (EXPAND
+                                                                                         "apply_sub_lhs_prb_lst"
+                                                                                         1)
+                                                                                        (("2"
+                                                                                          (REWRITE
+                                                                                           "alpha_eq_lst?_append")
+                                                                                          (("2"
+                                                                                            (PROP)
+                                                                                            (("1"
+                                                                                              (HIDE
+                                                                                               -1)
+                                                                                              (("1"
+                                                                                                (REVEAL
+                                                                                                 -19
+                                                                                                 -20)
+                                                                                                (("1"
+                                                                                                  (REPLACE
+                                                                                                   -1
+                                                                                                   1)
+                                                                                                  (("1"
+                                                                                                    (REPLACE
+                                                                                                     -2
+                                                                                                     1)
+                                                                                                    (("1"
+                                                                                                      (HIDE
+                                                                                                       -1
+                                                                                                       -2)
+                                                                                                      (("1"
+                                                                                                        (CASE
+                                                                                                            "more_gen_sub?(Nabla)(sigma1_alg, sigma1)")
+                                                                                                        (("1"
+                                                                                                          (EXPAND
+                                                                                                           "more_gen_sub?")
+                                                                                                          (("1"
+                                                                                                            (SKEEP)
+                                                                                                            (("1"
+                                                                                                              (LEMMA
+                                                                                                               "alpha_Subs_invariance")
+                                                                                                              (("1"
+                                                                                                                (INST
+                                                                                                                 -1
+                                                                                                                 "Nabla"
+                                                                                                                 "append(lambda1, sigma1_alg)"
+                                                                                                                 "sigma1"
+                                                                                                                 "t_alg")
+                                                                                                                (("1"
+                                                                                                                  (ASSERT)
+                                                                                                                  (("1"
+                                                                                                                    (PROP)
+                                                                                                                    (("1"
+                                                                                                                      (HIDE
+                                                                                                                       -2)
+                                                                                                                      (("1"
+                                                                                                                        (EXPAND 
+                                                                                                                         "alpha_eq_lst?")
+                                                                                                                        (("1"
+                                                                                                                          (ASSERT)
+                                                                                                                          (("1"
+                                                                                                                            (PROP)
+                                                                                                                            (("1"
+                                                                                                                              (EXPAND
+                                                                                                                               "alpha_eq_lst?"
+                                                                                                                               1)
+                                                                                                                              (("1"
+                                                                                                                                (PROPAX)
+                                                                                                                                NIL
+                                                                                                                                NIL))
+                                                                                                                              NIL)
+                                                                                                                             ("2"
+                                                                                                                              (CASE
+                                                                                                                                  "alpha(Nabla)(Subs(append(lambda1, sigma1_alg))(t_alg), s_alg)")
+                                                                                                                              (("1"
+                                                                                                                                (LEMMA
+                                                                                                                                 "alpha_transitive")
+                                                                                                                                (("1"
+                                                                                                                                  (INST
+                                                                                                                                   -1
+                                                                                                                                   "Nabla"
+                                                                                                                                   "Subs(sigma1)(t_alg)"
+                                                                                                                                   "Subs(append(lambda1, sigma1_alg))(t_alg)"
+                                                                                                                                   "s_alg")
+                                                                                                                                  (("1"
+                                                                                                                                    (ASSERT)
+                                                                                                                                    NIL
+                                                                                                                                    NIL))
+                                                                                                                                  NIL))
+                                                                                                                                NIL)
+                                                                                                                               ("2"
+                                                                                                                                (HIDE
+                                                                                                                                 -1)
+                                                                                                                                (("2"
+                                                                                                                                  (REWRITE
+                                                                                                                                   "Subs_append")
+                                                                                                                                  (("2"
+                                                                                                                                    (EXPAND
+                                                                                                                                     "sigma1_alg"
+                                                                                                                                     1)
+                                                                                                                                    (("2"
+                                                                                                                                      (EXPAND
+                                                                                                                                       "Subs"
+                                                                                                                                       1
+                                                                                                                                       2)
+                                                                                                                                      (("2"
+                                                                                                                                        (EXPAND
+                                                                                                                                         "Subs"
+                                                                                                                                         1
+                                                                                                                                         2)
+                                                                                                                                        (("2"
+                                                                                                                                          (EXPAND
+                                                                                                                                           "subs"
+                                                                                                                                           1)
+                                                                                                                                          (("2"
+                                                                                                                                            (HIDE
+                                                                                                                                             2)
+                                                                                                                                            (("2"
+                                                                                                                                              (LEMMA
+                                                                                                                                               "ext_append")
+                                                                                                                                              (("2"
+                                                                                                                                                (INST?
+                                                                                                                                                 -1)
+                                                                                                                                                (("2"
+                                                                                                                                                  (REPLACE
+                                                                                                                                                   -1
+                                                                                                                                                   1
+                                                                                                                                                   RL)
+                                                                                                                                                  (("2"
+                                                                                                                                                    (HIDE
+                                                                                                                                                     -1)
+                                                                                                                                                    (("2"
+                                                                                                                                                      (LEMMA
+                                                                                                                                                       "alpha_ext_invariance_left")
+                                                                                                                                                      (("2"
+                                                                                                                                                        (REWRITE
+                                                                                                                                                         "Subs_perm_comm")
+                                                                                                                                                        (("2"
+                                                                                                                                                          (INST
+                                                                                                                                                           -1
+                                                                                                                                                           "Nabla"
+                                                                                                                                                           "append(p(t_alg), reverse(p(t_alg)))"
+                                                                                                                                                           "(::)"
+                                                                                                                                                           "Subs(lambda1)(s_alg)"
+                                                                                                                                                           "s_alg")
+                                                                                                                                                          (("2"
+                                                                                                                                                            (PROP)
+                                                                                                                                                            (("1"
+                                                                                                                                                              (CASE
+                                                                                                                                                                  "alpha(Nabla)
+           (Subs(lambda1)(s_alg),
+            s_alg)")
+                                                                                                                                                              (("1"
+                                                                                                                                                                (POSTPONE)
+                                                                                                                                                                NIL
+                                                                                                                                                                NIL)
+                                                                                                                                                               ("2"
+                                                                                                                                                                (HIDE
+                                                                                                                                                                 2)
+                                                                                                                                                                (("2"
+                                                                                                                                                                  (POSTPONE)
+                                                                                                                                                                  NIL
+                                                                                                                                                                  NIL))
+                                                                                                                                                                NIL))
+                                                                                                                                                              NIL)
+                                                                                                                                                             ("2"
+                                                                                                                                                              (POSTPONE)
+                                                                                                                                                              NIL
+                                                                                                                                                              NIL))
+                                                                                                                                                            NIL))
+                                                                                                                                                          NIL))
+                                                                                                                                                        NIL))
+                                                                                                                                                      NIL))
+                                                                                                                                                    NIL))
+                                                                                                                                                  NIL))
+                                                                                                                                                NIL))
+                                                                                                                                              NIL))
+                                                                                                                                            NIL))
+                                                                                                                                          NIL))
+                                                                                                                                        NIL))
+                                                                                                                                      NIL))
+                                                                                                                                    NIL))
+                                                                                                                                  NIL))
+                                                                                                                                NIL))
+                                                                                                                              NIL))
+                                                                                                                            NIL))
+                                                                                                                          NIL))
+                                                                                                                        NIL))
+                                                                                                                      NIL)
+                                                                                                                     ("2"
+                                                                                                                      (POSTPONE)
+                                                                                                                      NIL
+                                                                                                                      NIL))
+                                                                                                                    NIL))
+                                                                                                                  NIL))
+                                                                                                                NIL))
+                                                                                                              NIL))
+                                                                                                            NIL))
+                                                                                                          NIL)
+                                                                                                         ("2"
+                                                                                                          (POSTPONE)
+                                                                                                          NIL
+                                                                                                          NIL))
+                                                                                                        NIL))
+                                                                                                      NIL))
+                                                                                                    NIL))
+                                                                                                  NIL))
+                                                                                                NIL))
+                                                                                              NIL)
+                                                                                             ("2"
+                                                                                              (POSTPONE)
+                                                                                              NIL
+                                                                                              NIL))
+                                                                                            NIL))
+                                                                                          NIL))
+                                                                                        NIL))
+                                                                                      NIL))
+                                                                                    NIL))
+                                                                                  NIL))
+                                                                                NIL))
+                                                                              NIL))
+                                                                            NIL))
+                                                                          NIL))
+                                                                        NIL))
+                                                                      NIL)
+                                                                     ("3"
+                                                                      (POSTPONE)
+                                                                      NIL NIL)
+                                                                     ("4"
+                                                                      (POSTPONE)
+                                                                      NIL NIL)
+                                                                     ("5"
+                                                                      (POSTPONE)
+                                                                      NIL NIL))
+                                                                    NIL))
+                                                                  NIL))
+                                                                NIL)
+                                                               ("2" (POSTPONE)
+                                                                NIL NIL)
+                                                               ("3" (POSTPONE)
+                                                                NIL NIL))
+                                                              NIL))
+                                                            NIL))
+                                                          NIL))
+                                                        NIL))
+                                                      NIL))
+                                                    NIL))
+                                                  NIL))
+                                                NIL))
+                                              NIL))
+                                            NIL))
+                                          NIL))
+                                        NIL)
+                                       ("2" (POSTPONE) NIL NIL))
+                                      NIL))
+                                    NIL))
+                                  NIL)
+                                 ("2" (POSTPONE) NIL NIL)
+                                 ("3" (POSTPONE) NIL NIL))
+                                NIL)
+                               ("2" (POSTPONE) NIL NIL))
+                              NIL))
+                            NIL))
+                          NIL)
+                         ("2" (POSTPONE) NIL NIL))
+                        NIL))
+                      NIL))
+                    NIL))
+                  NIL))
+                NIL))
+              NIL))
+            NIL))
+          NIL))
+        NIL))
+      NIL))
+    NIL)
+   NIL SHOSTAK)))
+
