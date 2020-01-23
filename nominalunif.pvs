@@ -46,6 +46,7 @@ nominal_sol: VAR nominal_sol_typ
 
        	    IMPORTING structure_extra[nominal_sol_typ]
 	    
+	    
 % variables needed to specify algorithm
 sol: VAR nominal_sol_typ
 sol_lst: VAR list[nominal_sol_typ]

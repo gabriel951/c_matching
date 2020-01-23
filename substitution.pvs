@@ -492,10 +492,11 @@ suf_cond_term_is_sub: LEMMA
 %%%%%%%%%%%%%%%%%%%%% lemmas that i had to add as I am working with matching
 other_cond_skip_term: LEMMA
    (disjoint?(Vars(t), vars_dom_sub(gamma)) AND 
-   FORALL X: alpha(Delta)(Subs(append(lambda1, sigma))((::)*X), Subs(gamma)((::)*X)) AND
+   (FORALL X: alpha(Delta)(Subs(append(lambda1, sigma))((::)*X), Subs(gamma)((::)*X))) AND
    Subs(sigma)(t) = t)
-   => Subs(lambda1)(t) = t
-   
+   => alpha(Delta)(Subs(lambda1)(t), t)
+
+    
 %%%%%%%%%%%%%%%%%%%%% necessary lemmas related to functions fresh_subs and similar ones
 % useful lemmas that appeared in the the proof of completeness
 aux_lemma_fresh_sub1: LEMMA

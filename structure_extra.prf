@@ -5,7 +5,7 @@
     (("1" (INDUCT "l2") (("1" (GRIND) NIL NIL) ("2" (GRIND) NIL NIL)) NIL)
      ("2" (GRIND) NIL NIL))
     NIL)
-   (NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL) NIL)
+   NIL NIL)
   (|append_member-1| NIL 3624620858
    ("" (INDUCT L1)
     (("1" (INDUCT L2) (("1" (GRIND) NIL NIL) ("2" (GRIND) NIL NIL)) NIL)
@@ -16,12 +16,9 @@
   (|nth_append_TCC1-1| NIL 3627807289
    ("" (SKEEP) (("" (REWRITE "length_append") (("" (ASSERT) NIL NIL)) NIL))
     NIL)
-   (NIL NIL NIL NIL NIL) NIL))
+   NIL NIL))
  (|nth_append_TCC2| 0
-  (|nth_append_TCC2-1| NIL 3627807289 ("" (SUBTYPE-TCC) NIL NIL)
-   (NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL
-    NIL NIL NIL NIL NIL NIL)
-   NIL))
+  (|nth_append_TCC2-1| NIL 3627807289 ("" (SUBTYPE-TCC) NIL NIL) NIL NIL))
  (|nth_append| 0
   (|nth_append-2| NIL 3745849360
    ("" (SKOLEM 1 ("_" "l2" "_"))
@@ -60,10 +57,7 @@
         (("4" (GRIND) (("4" (REWRITE "length_append") NIL NIL)) NIL)) NIL))
       NIL))
     NIL)
-   (NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL
-    NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL NIL
-    NIL NIL NIL NIL)
-   NIL)
+   NIL NIL)
   (|nth_append-1| NIL 3627807291
    ("" (SKOLEM 1 ("_" L2 "_"))
     (("" (INDUCT L1)
@@ -105,5 +99,14 @@
    ("" (SKEEP)
     (("" (GRIND) (("" (EXPAND "append" -1) (("" (GRIND) NIL NIL)) NIL)) NIL))
     NIL)
-   ((|append| DEF-DECL "list[T]" |list_props| NIL)) SHOSTAK)))
+   ((|append| DEF-DECL "list[T]" |list_props| NIL)) SHOSTAK))
+ (|disjoint_union| 0
+  (|disjoint_union-1| NIL 3788729364 ("" (SKEEP) (("" (GRIND) NIL NIL)) NIL)
+   ((|disjoint?| CONST-DECL "bool" |sets| NIL)
+    (|empty?| CONST-DECL "bool" |sets| NIL)
+    (|intersection| CONST-DECL "set" |sets| NIL)
+    (|union| CONST-DECL "set" |sets| NIL)
+    (|member| CONST-DECL "bool" |sets| NIL)
+    (T FORMAL-TYPE-DECL NIL |structure_extra| NIL))
+   SHOSTAK)))
 

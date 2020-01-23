@@ -16,6 +16,10 @@ BEGIN
 	  x: VAR T
     l,l1,l2: VAR list[T]
 
+ set: TYPE = setof[T]
+
+  a, b, c: VAR set
+
  append_member: LEMMA
    member(x, append(l1,l2)) = (member(x,l1) OR member(x,l2))
 
@@ -29,4 +33,9 @@ BEGIN
 
  null_append: LEMMA
    null?(append(l1, l2)) => null?(l1) AND null?(l2) 
+
+ disjoint_union: LEMMA
+   disjoint?(a, union(b, c)) => disjoint?(a, b) AND disjoint?(a, c) 
+
 END structure_extra
+
