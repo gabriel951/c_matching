@@ -378,6 +378,9 @@ vars_dom_sub_append: LEMMA
    member(X, vars_dom_sub(append(sigma, gamma))) => member(X, vars_dom_sub(sigma)) OR
                                                     member(X, vars_dom_sub(gamma))
 
+vars_dom_sub_append2: LEMMA
+   vars_dom_sub(append(sigma, gamma)) = union(vars_dom_sub(sigma), vars_dom_sub(gamma))
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%% necessary lemmas i added
@@ -444,6 +447,10 @@ suf_cond_more_gen_sub?_append: LEMMA
              vars_dom_sub(gamma)) AND 
    more_gen_sub?(Nabla)(append(sigma, gamma), lambda1) => more_gen_sub?(Nabla)(sigma, lambda1)
 
+% a rather obvious lemma. The above one is more sophisticate. 
+suf_cond_more_gen_sub?_append2: LEMMA
+   more_gen_sub?(Nabla)(append(sigma, gamma), lambda1) => more_gen_sub?(Nabla)(gamma, lambda1)
+   
 % if X is in the domain of a well behaved substitution sigma then X is not in sigma t
 well_behaved?_var_disappear: LEMMA 
    member(X, vars_dom_sub(sigma)) AND well_behaved?(sigma) =>
@@ -463,6 +470,7 @@ subs_add_alg_well_behaved?: LEMMA
    NOT member(X, Vars(t)) => well_behaved?((:(X, t):))
 
 % a technical lemma to be used in the proof of completeness
+% a sufficient condition that a nuclear substitution is more general than other
 suf_cond_more_gen_nuc_sub: LEMMA  
    sigma = (: (X, ext(reverse(pi))(t)) :) AND NOT member(X, Vars(t)) AND
    alpha(Delta)(Subs(gamma)(pi * X), Subs(gamma)(t))

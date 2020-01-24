@@ -34,6 +34,9 @@ fix_pnt_eq_typ: TYPE = [perm, variable]
 fix_pnt_eq: VAR fix_pnt_eq_typ                 
 fix_pnt_eq_lst, fix_pnt_eq_lst1, fix_pnt_eq_lst2, fix_pnt_eq_lst_sol: VAR list[fix_pnt_eq_typ]
 
+% protected variables to deal with matching
+prtc_vars: VAR finite_set[variable]
+
 % a unification problem type is a list containing the two terms to be unified
 unif_prb_typ: TYPE = [term, term]
 unif_prb: VAR unif_prb_typ
@@ -127,8 +130,8 @@ ELSE LET fix_pnt_eq = car(fix_pnt_eq_lst),
 ENDIF
 MEASURE fix_pnt_eq_lst BY << 
 
-% defines a valid quadruple. Valid quadruples are what occur in the algorithm 
-valid_quadruple?(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst): bool =
+% defines a valid quintuple. Valid quintuples are what occur in the algorithm 
+valid_quint?(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst): bool =
    % well - behaved substitution
    well_behaved?(sigma)  
    AND 
@@ -136,18 +139,18 @@ valid_quadruple?(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst): bool =
    disjoint?(vars_dom_sub(sigma), vars_lst(append(unif_prb_lst, fix_pnt2unif_prb(fix_pnt_eq_lst))))
 
 % returns a boolean indicating if the pair (Nabla, sigma) is a solution to a
-% problem quadruple (Delta, gamma, unif_prb_lst, fix_pnt_eq_lst) 
-sol_prb_quad?(Nabla, sigma)(Delta, gamma, unif_prb_lst, fix_pnt_eq_lst): bool =
+% problem quintuple (prtc_vars, Delta, gamma, unif_prb_lst, fix_pnt_eq_lst) 
+sol_prb_quint?(Nabla, sigma)(prtc_vars, Delta, gamma, unif_prb_lst, fix_pnt_eq_lst): bool =
     % Nabla |- Delta sigma
     fresh_subs(Nabla)(sigma, Delta) AND
     % Nabla |- s(sigma) = t(sigma), for all s and t in the unification problem list
-    alpha_eq_lst?(Nabla, apply_sub_lhs_prb_lst(sigma, unif_prb_lst)) AND
+    alpha_eq_lst?(Nabla, apply_sub_prb_lst(sigma, unif_prb_lst)) AND
     % Nabla |- (pi X)sigma = (pi' X)sigma, for all fix point equations in the list
-    alpha_eq_lst?(Nabla, apply_sub_lhs_prb_lst(sigma, fix_pnt2unif_prb(fix_pnt_eq_lst))) AND 
+    alpha_eq_lst?(Nabla, apply_sub_prb_lst(sigma, fix_pnt2unif_prb(fix_pnt_eq_lst))) AND 
     % gamma is more general than sigma under the context Nabla
     more_gen_sub?(Nabla)(gamma, sigma) AND
     % this has to be added since we are doing matching. The variables in the RHS dont occur in the substitution.
-    disjoint?(vars_dom_sub(sigma), vars_rhs_lst(append(unif_prb_lst, fix_pnt2unif_prb(fix_pnt_eq_lst))))
+    disjoint?(vars_dom_sub(sigma), prtc_vars)
     
 
 %%%%%%%%%% end of useful functions 
@@ -175,6 +178,15 @@ apply_sub_elim_var_term: LEMMA
 apply_sub_elim_var: LEMMA
    (member(X, vars_dom_sub(sigma)) AND (NOT member(X, vars_range_sub(sigma)))) =>
    NOT member(X, vars_lst(apply_sub_prb_lst(sigma, unif_prb_lst)))
+
+% similar to the lemma above 
+apply_well_behaved?_disjoint_var: LEMMA
+    well_behaved?(sigma) => disjoint?(vars_dom_sub(sigma), vars_lst(apply_sub_prb_lst(sigma, unif_prb_lst)))
+
+% a suf condition that applying a substitution preserves disjointness 
+apply_sub_preserves_disjoint?: LEMMA 
+    disjoint?(vars_dom_sub(sigma), vars_lst(unif_prb_lst)) AND disjoint?(vars_dom_sub(sigma), vars_range_sub(gamma))	
+    => disjoint?(vars_dom_sub(sigma), vars_lst(apply_sub_prb_lst(gamma, unif_prb_lst))) 
 
 % apply_sub (sigma, l1 + l2) = apply_sub(sigma, l1) + apply_sub(sigma, l2)
 apply_sub_prb_lst_append: LEMMA
@@ -230,37 +242,60 @@ cdr_smaller_size: LEMMA
 NOT null?(unif_prb_lst) => size_lst(cdr(unif_prb_lst)) < size_lst(unif_prb_lst)
 
 %%%%%%%%%% end of lemmas related to the auxiliar functions above
-
-
-%%%%%%%%%% function to match (modulo C) a list of terms 
-c_match(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst): RECURSIVE list[nominal_sol_typ] =
+c_unify(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst): RECURSIVE list[nominal_sol_typ] =
 % base case: if there is no problem left to unify, the solution given is good enough
 IF null?(unif_prb_lst) THEN (:(Delta, sigma, fix_pnt_eq_lst):)
 % start unifying first problem of the list
 ELSE LET t = car(unif_prb_lst)`1, s = car(unif_prb_lst)`2
      	 IN % we divide in cases
-	    CASES t OF
-	    	 at(a): IF s = at(a) THEN c_match(Delta, sigma, cdr(unif_prb_lst), fix_pnt_eq_lst) 
+	    % in the first case we see if we can instantiate s correctly
+	    IF susp?(s) AND (NOT occurs(V(s), t)) AND (NOT member(V(s), prtc_vars)) 
+	    THEN LET
+	    	 % substitution that will be added 
+	         sigma1 = (: (V(s), ext(reverse(p(s)))(t) ) :),
+		 % apply substitution to context and check if it is consistent
+		 (Delta1, bool1) = fresh_subs?(sigma1, Delta),
+		 % add new context to the old one we had
+		 new_Delta = append(Delta1, Delta), 
+		 % get new substitution list 
+		 new_sigma = append(sigma1, sigma), 
+	    	 % get new problem list - apply substitution to remaining problems and to fixpoint equations.
+		 % convert fixpoint equations back on unification problems
+		 unif_prb_lst1 = apply_sub_prb_lst(sigma1, cdr(unif_prb_lst)), 
+		 unif_prb_lst2 = apply_sub_prb_lst(sigma1, fix_pnt2unif_prb(fix_pnt_eq_lst)),
+		 new_unif_prb_lst = append(unif_prb_lst1, unif_prb_lst2)
+		 % output solution, take into account if context and fix point equations remain consistent
+		 IN IF bool1 THEN c_unify(prtc_vars, new_Delta, new_sigma, new_unif_prb_lst, (::))
+		    ELSE (::) % here, OR the context is not fresh anymore OR the fixpoint equations lst is not consistent anymore
+		    ENDIF
+		   
+            ELSE CASES t OF
+	    	 at(a): IF s = at(a) THEN c_unify(prtc_vars, Delta, sigma, cdr(unif_prb_lst), fix_pnt_eq_lst) 
       		 	ELSE (::)
-			ENDIF,	   
-	         *(pm, X): IF NOT occurs(X, s) THEN LET 
-	             					sigma1 = (: (X, ext(reverse(pm))(s) ) :),
-		   					(Delta1, bool1) = fresh_subs?(sigma1, Delta),
-							new_Delta = append(Delta1, Delta),
-							new_sigma = append(sigma1, sigma), 
-							unif_prb_lst1 = apply_sub_prb_lst(sigma1, cdr(unif_prb_lst)), 
-		     					unif_prb_lst2 = apply_sub_prb_lst(sigma1, fix_pnt2unif_prb(fix_pnt_eq_lst)),
-		     					new_unif_prb_lst = append(unif_prb_lst1, unif_prb_lst2)
-							IN IF bool1 THEN c_match(new_Delta, new_sigma, new_unif_prb_lst, (::))
-		       					ELSE (::)
-							ENDIF
+			ENDIF,
+			
+		 % this case is similar to s being a suspension	   
+	         *(pm, X): IF NOT occurs(X, s)
+		       	      THEN IF member(X, prtc_vars) THEN (::) 
+				   ELSE LET % this is the same as the case above where s is a suspension.
+	             			sigma1 = (: (X, ext(reverse(pm))(s) ) :),
+		   			(Delta1, bool1) = fresh_subs?(sigma1, Delta),
+					new_Delta = append(Delta1, Delta),
+					new_sigma = append(sigma1, sigma), 
+					unif_prb_lst1 = apply_sub_prb_lst(sigma1, cdr(unif_prb_lst)), 
+		     			unif_prb_lst2 = apply_sub_prb_lst(sigma1, fix_pnt2unif_prb(fix_pnt_eq_lst)),
+		     			new_unif_prb_lst = append(unif_prb_lst1, unif_prb_lst2)
+					IN IF bool1 THEN c_unify(prtc_vars, new_Delta, new_sigma, new_unif_prb_lst, (::))
+		       			   ELSE (::)
+					   ENDIF
+				   ENDIF 
 		       	   ELSIF susp?(s) AND occurs(X, s) THEN LET new_fix_pnt_eq = (:(append(reverse(p(s)), pm), X):),
 			   	 	      		   	    new_fix_pnt_eq_lst = append(new_fix_pnt_eq, fix_pnt_eq_lst)
-			   	 	      		   	    IN c_match(Delta, sigma, cdr(unif_prb_lst), new_fix_pnt_eq_lst)
+			   	 	      		   	    IN c_unify(prtc_vars, Delta, sigma, cdr(unif_prb_lst), new_fix_pnt_eq_lst)
 			   ELSE (::) 
 			   ENDIF, 
 
-		 unit: IF s = unit THEN c_match(Delta, sigma, cdr(unif_prb_lst), fix_pnt_eq_lst)
+		 unit: IF s = unit THEN c_unify(prtc_vars, Delta, sigma, cdr(unif_prb_lst), fix_pnt_eq_lst)
 		       ELSE (::)
 		       ENDIF,
 
@@ -268,13 +303,13 @@ ELSE LET t = car(unif_prb_lst)`1, s = car(unif_prb_lst)`2
 		               ELSE LET unif_prb1 = (:(t1, term1(s)):),
 			       	    	unif_prb2 = (:(t2, term2(s)):),
 			                new_unif_prb_lst = append(append(unif_prb1, unif_prb2), cdr(unif_prb_lst))
-			       	    IN  c_match(Delta, sigma, new_unif_prb_lst, fix_pnt_eq_lst)
+			       	    IN  c_unify(prtc_vars, Delta, sigma, new_unif_prb_lst, fix_pnt_eq_lst)
 			       ENDIF, 
 
                  abs(a, bd): IF NOT abs?(s) THEN (::)
 		 	     ELSIF a = abstr(s) THEN LET new_unif_prb = (:(bd, body(s)):),
 			     	       		     	 new_unif_prb_lst = append(new_unif_prb, cdr(unif_prb_lst))
-							 IN c_match(Delta, sigma, new_unif_prb_lst, fix_pnt_eq_lst)
+							 IN c_unify(prtc_vars, Delta, sigma, new_unif_prb_lst, fix_pnt_eq_lst)
 		             ELSE LET % derives minimal context in which a is fresh in body(s) 
 			     	      (Delta1, bool1) = fresh?(a, body(s)),
 				      % new context under which we must unify the remaining problems 
@@ -283,7 +318,7 @@ ELSE LET t = car(unif_prb_lst)`1, s = car(unif_prb_lst)`2
 				      new_unif_prb = (: (bd, ext((: (a, abstr(s)) :))(body(s))) :),
 				      new_unif_prb_lst = append(new_unif_prb, cdr(unif_prb_lst))
 				      % unify
-				      IN IF bool1 THEN c_match(new_Delta, sigma, new_unif_prb_lst, fix_pnt_eq_lst)
+				      IN IF bool1 THEN c_unify(prtc_vars, new_Delta, sigma, new_unif_prb_lst, fix_pnt_eq_lst)
 				      	 ELSE (::)
 					 ENDIF
 			     ENDIF,
@@ -291,7 +326,7 @@ ELSE LET t = car(unif_prb_lst)`1, s = car(unif_prb_lst)`2
 	         app(f, ag): IF NOT app?(s) OR f /= sym(s) THEN (::)
 		 	     ELSE LET new_unif_prb = (:(ag, arg(s)):),
 			     	      new_unif_prb_lst = append(new_unif_prb, cdr(unif_prb_lst))
-				      IN c_match(Delta, sigma, new_unif_prb_lst, fix_pnt_eq_lst)
+				      IN c_unify(prtc_vars, Delta, sigma, new_unif_prb_lst, fix_pnt_eq_lst)
 			     ENDIF,
 
 		c_app(f, ag): IF (NOT c_app?(s)) OR (f /= c_sym(s)) THEN (::)
@@ -299,17 +334,21 @@ ELSE LET t = car(unif_prb_lst)`1, s = car(unif_prb_lst)`2
 					  unif_prb1_1 = (:(term1(ag), term1(c_arg(s))):),
 					  unif_prb2_2 = (:(term2(ag), term2(c_arg(s))):),
 					  unif_prb_lst1 = append(append(unif_prb1_1, unif_prb2_2), cdr(unif_prb_lst)),
-					  sol1 = c_match(Delta, sigma, unif_prb_lst1, fix_pnt_eq_lst),
+					  sol1 = c_unify(prtc_vars, Delta, sigma, unif_prb_lst1, fix_pnt_eq_lst),
 					  % solve problem, trying to unify (t1 with s2) and (t2 with s1)
 					  unif_prb1_2 = (:(term1(ag), term2(c_arg(s))):),
 					  unif_prb2_1 = (:(term2(ag), term1(c_arg(s))):),
 					  unif_prb_lst2 = append(append(unif_prb1_2, unif_prb2_1), cdr(unif_prb_lst)),
-					  sol2 = c_match(Delta, sigma, unif_prb_lst2, fix_pnt_eq_lst)
+					  sol2 = c_unify(prtc_vars, Delta, sigma, unif_prb_lst2, fix_pnt_eq_lst)
 					  IN append(sol1, sol2) 
 			 	 ENDIF 
 	        ENDCASES
+	    ENDIF
 ENDIF
 MEASURE lex2(card(vars_lst(append(unif_prb_lst, fix_pnt2unif_prb(fix_pnt_eq_lst)))), size_lst(unif_prb_lst))
+
+%%%%%%%%%% function to unify (modulo C) a list of terms 
+
 %%%%%%%%%% end of algorithm to perform c unification 
 
 %%%%%%%%%%% auxiliar lemmas for soundness of the algorithm
@@ -335,43 +374,44 @@ suf_cond_member_unif_prb_lst: LEMMA
    => member(X, vars_lst(unif_prb_lst))
 
 % trivial lemma, that will be used in the proof of the main theorem. 
-valid_quadruple?_cdr: CONJECTURE
-   valid_quadruple?(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) AND NOT null?(unif_prb_lst) =>
-   valid_quadruple?(Delta, sigma, cdr(unif_prb_lst), fix_pnt_eq_lst) 
+valid_quint?_cdr: CONJECTURE
+   valid_quint?(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) AND NOT null?(unif_prb_lst) =>
+   valid_quint?(prtc_vars, Delta, sigma, cdr(unif_prb_lst), fix_pnt_eq_lst) 
 
 %%%%%%%%%%% end of auxiliar lemmas for soundness of the algorithm
 
 
 %%%%%%%%%% specification of soundness and completeness of the algorithm
-% soundness of match - main theorem
-c_match_sound: LEMMA  
+% soundness of unify with protected variables - main theorem
+c_unify_sound: LEMMA
 FORALL Delta_sol, sigma_sol, fix_pnt_eq_lst_sol:
-    (member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_match(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst)) AND
-        sol_prb_quad?(Nabla, sigma1)(Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol) AND
-	valid_quadruple?(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst))
-	=> sol_prb_quad?(Nabla, sigma1)(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst)
+    (member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst))
+    AND sol_prb_quint?(Nabla, sigma1)(prtc_vars, Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol) AND
+	valid_quint?(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst))
+	=> sol_prb_quint?(Nabla, sigma1)(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst)
 
-% soundness of c match for the initial call of the algorithm 
+% soundness of matching 
 c_match_sound_cor: COROLLARY
 FORALL Delta_sol, sigma_sol, fix_pnt_eq_lst_sol:
-        (member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_match((::), (::), (:(t, s):), (::))) AND
-        sol_prb_quad?(Nabla, sigma1)(Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol))
-	=> sol_prb_quad?(Nabla, sigma1)((::), (::), (:(t, s):), (::))
+        (member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify(Vars(s), (::), (::), (:(t, s):), (::))) AND
+        sol_prb_quint?(Nabla, sigma1)(Vars(s), Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol))
+	=> sol_prb_quint?(Nabla, sigma1)(Vars(s), (::), (::), (:(t, s):), (::))
 
 % completeness of c match - main theorem
 c_match_complete: LEMMA
-    sol_prb_quad?(Nabla, sigma1)(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) AND
-    valid_quadruple?(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) =>
+    sol_prb_quint?(Nabla, sigma1)(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) AND
+    valid_quint?(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) =>
     EXISTS Delta_sol, sigma_sol, fix_pnt_eq_lst_sol:
-       member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_match(Delta, sigma, unif_prb_lst, fix_pnt_eq_lst))
-	AND sol_prb_quad?(Nabla, sigma1)(Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol)
+       member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst))
+	AND sol_prb_quint?(Nabla, sigma1)(prtc_vars, Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol)
 
 % completeness of c match for the initial call of the algorithm 
 c_match_complete_cor: COROLLARY
-    sol_prb_quad?(Nabla, sigma1)((::), (::), (:(t, s):), (::)) =>
+LET prtc_var = Vars(s) IN 
+    sol_prb_quint?(Nabla, sigma1)(prtc_var, (::), (::), (:(t, s):), (::)) =>
     EXISTS Delta_sol, sigma_sol, fix_pnt_eq_lst_sol:
-       member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_match((::), (::), (:(t, s):), (::)) )
-       AND sol_prb_quad?(Nabla, sigma1)(Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol)
+       member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify(prtc_var, (::), (::), (:(t, s):), (::)) )
+       AND sol_prb_quint?(Nabla, sigma1)(prtc_var, Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol)
 %%%%%%%%%% end of specification of soundness and completeness of algorithm  
 
 

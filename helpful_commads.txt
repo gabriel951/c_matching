@@ -1,0 +1,31 @@
+# before atoms
+(name-replace "sigma1_alg" "(: (V(s_alg), ext(reverse(p(s_alg)))(t_alg) ) :)" )
+(name-replace "new_sigma_alg" "append(sigma1_alg, sigma)")
+(name-replace "Delta1_alg" "fresh_subs?(sigma1_alg, Delta)`1")
+(name-replace "bool1_alg" "fresh_subs?(sigma1_alg, Delta)`2")
+(name-replace "unif_prb_lst1_alg" "apply_sub_prb_lst(sigma1_alg, cdr(x!1))")
+(name-replace "unif_prb_lst2_alg" "apply_sub_prb_lst(sigma1_alg, fix_pnt2unif_prb(x!2))")
+(name-replace "new_Delta_alg" "append(Delta1_alg, Delta)")
+(name-replace "new_unif_prb_lst_alg" "append(unif_prb_lst1_alg, unif_prb_lst2_alg)")
+(inst -1 "new_Delta_alg" "Nabla" "prtc_vars" "new_sigma_alg" "sigma1" "Delta_sol" "sigma_sol" "fix_pnt_eq_lst_sol")
+
+## atoms
+(name-replace "t_alg" "car(x!1)`1")
+(name-replace "s_alg" "car(x!1)`2")
+# the first instantiation is with the new unif_prb_lst and the new_fix_pnt_equation
+(inst -1 "Delta" "Nabla" "sigma" "sigma1" "Delta_sol" "sigma_sol" "fix_pnt_eq_lst_sol")
+
+
+## susp var
+(name-replace "sigma1_alg" "(: (V(t_alg), ext(reverse(p(t_alg)))(s_alg) ) :)" )
+(name-replace "new_sigma_alg" "append(sigma1_alg, sigma)")
+(name-replace "Delta1_alg" "fresh_subs?(sigma1_alg, Delta)`1")
+(name-replace "bool1_alg" "fresh_subs?(sigma1_alg, Delta)`2")
+(name-replace "unif_prb_lst1_alg" "apply_sub_prb_lst(sigma1_alg, cdr(x!1))")
+(name-replace "unif_prb_lst2_alg" "apply_sub_prb_lst(sigma1_alg, fix_pnt2unif_prb(x!2))")
+(name-replace "new_Delta_alg" "append(Delta1_alg, Delta)")
+(name-replace "new_unif_prb_lst_alg" "append(unif_prb_lst1_alg, unif_prb_lst2_alg)")
+
+
+##################################
+# completeness
