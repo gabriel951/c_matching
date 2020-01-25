@@ -70,6 +70,10 @@ Subs_perm_comm: LEMMA
 Subs_atom: LEMMA
    Subs(sigma)(at(a)) = at(a)
 
+% how a substitution may change a permuted variable
+Subs_susp: LEMMA
+   Subs(sigma)(pi * X) = ext(pi)(Subs(sigma)((::) * X))
+   
 % Substitution does not change unit.
 Subs_unit: LEMMA
    Subs(sigma)(unit) = unit
@@ -491,7 +495,7 @@ suf_cond_more_gen_append: LEMMA
 size_term_gt_var_after_sub: LEMMA
    member(X, Vars(t)) AND NOT susp?(t) => size(Subs(sigma)(t)) > size(Subs(sigma)(pi * X))
    
-% a suficient condition for a term to be a substitution
+% a suficient condition for a term to be a suspended variable 
 % needed in the completeness theorem
 suf_cond_term_is_sub: LEMMA
    member(X, Vars(t)) AND alpha(Delta)(Subs(sigma)(pi * X), Subs(sigma)(t))
@@ -504,6 +508,9 @@ other_cond_skip_term: LEMMA
    Subs(sigma)(t) = t)
    => alpha(Delta)(Subs(lambda1)(t), t)
 
+% another sufficient condition for a term to be a suspended variable, needed in the completeness theorem
+suf_cond_term_is_sub2: LEMMA
+   alpha(Delta)(t, Subs(sigma)(s)) AND susp?(t) => susp?(s) 
     
 %%%%%%%%%%%%%%%%%%%%% necessary lemmas related to functions fresh_subs and similar ones
 % useful lemmas that appeared in the the proof of completeness

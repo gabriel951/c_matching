@@ -29,3 +29,18 @@
 
 ##################################
 # completeness
+# before atoms
+(inst -1 "new_unif_prb_lst_alg" "(::)")
+(inst -1 "new_Delta_alg" "Nabla" "prtc_vars" "new_sigma_alg" "sigma1")
+obs: assim que você nomear as coisas, já compensa provar que more_gen_sub?(Nabla)(sigma1_alg, sigma1) :)
+
+# atoms
+(inst -1 "Delta" "Nabla" "prtc_vars" "sigma" "sigma1")
+
+# suspended variable depois do atomo
+-> mesma coisa com soudness
+
+-> fixpoint
+(name-replace "new_fix_pnt_eq_alg" "(:(append(reverse(p(s_alg)), p(t_alg)), V(t_alg)):)")
+(name-replace "new_fix_pnt_eq_lst_alg"  "append(new_fix_pnt_eq_alg, x!2)")
+(inst -1 "cdr(x!1)" "new_fix_pnt_eq_lst_alg")

@@ -374,9 +374,14 @@ suf_cond_member_unif_prb_lst: LEMMA
    => member(X, vars_lst(unif_prb_lst))
 
 % trivial lemma, that will be used in the proof of the main theorem. 
-valid_quint?_cdr: CONJECTURE
+valid_quint?_cdr: LEMMA
    valid_quint?(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) AND NOT null?(unif_prb_lst) =>
    valid_quint?(prtc_vars, Delta, sigma, cdr(unif_prb_lst), fix_pnt_eq_lst) 
+
+% another trivial lemma, to be used in the proof of the main theorem
+sol_prb_quint?_cdr: LEMMA
+   sol_prb_quint?(Nabla, sigma1)(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) AND NOT null?(unif_prb_lst) =>
+   sol_prb_quint?(Nabla, sigma1)(prtc_vars, Delta, sigma, cdr(unif_prb_lst), fix_pnt_eq_lst) 
 
 %%%%%%%%%%% end of auxiliar lemmas for soundness of the algorithm
 
