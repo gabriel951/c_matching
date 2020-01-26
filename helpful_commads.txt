@@ -44,3 +44,34 @@ obs: assim que você nomear as coisas, já compensa provar que more_gen_sub?(Nab
 (name-replace "new_fix_pnt_eq_alg" "(:(append(reverse(p(s_alg)), p(t_alg)), V(t_alg)):)")
 (name-replace "new_fix_pnt_eq_lst_alg"  "append(new_fix_pnt_eq_alg, x!2)")
 (inst -1 "cdr(x!1)" "new_fix_pnt_eq_lst_alg")
+
+# pair
+(name-replace "unif_prb1_alg" "(:(term1(t_alg), term1(s_alg)):)")
+(name-replace "unif_prb2_alg" "(:(term2(t_alg), term2(s_alg)):)")
+(name-replace "new_unif_prb_lst_alg" "append(append(unif_prb1_alg, unif_prb2_alg), cdr(x!1))")
+
+# abs
+(name-replace "new_unif_prb_alg" "(:(body(t_alg), body(s_alg)):)")
+(name-replace "new_unif_prb_lst_alg" "append(new_unif_prb_alg, cdr(x!1))")
+
+(name-replace "Delta1_alg" "fresh?(abstr(t_alg), body(s_alg))`1")
+(name-replace "bool1_alg" "fresh?(abstr(t_alg), body(s_alg))`2")
+(name-replace "new_Delta_alg" "append(Delta1_alg, Delta)" )
+(name-replace "new_unif_prb_alg"  "(: (body(t_alg), ext((: (abstr(t_alg), abstr(s_alg)) :))(body(s_alg))) :)")
+(name-replace "new_unif_prb_lst_alg"  "append(new_unif_prb_alg, cdr(x!1))")
+
+# app
+(name-replace "new_unif_prb_alg" "(:(arg(t_alg), arg(s_alg)):)")
+(name-replace "new_unif_prb_lst_alg" "append(new_unif_prb_alg, cdr(x!1))") 
+
+# capp
+(name-replace "unif_prb1_1_alg" "(:(term1(c_arg(t_alg)), term1(c_arg(s_alg))):)")
+(name-replace "unif_prb2_2_alg" "(:(term2(c_arg(t_alg)), term2(c_arg(s_alg))):)")
+(name-replace "unif_prb_lst1_alg" "append(append(unif_prb1_1_alg, unif_prb2_2_alg), cdr(x!1))")
+
+
+(name-replace "unif_prb1_2_alg" "(:(term1(c_arg(t_alg)), term2(c_arg(s_alg))):)")
+(name-replace "unif_prb2_1_alg" "(:(term2(c_arg(t_alg)), term1(c_arg(s_alg))):)")
+(name-replace "unif_prb_lst1_alg" "append(append(unif_prb1_1_alg, unif_prb2_2_alg), cdr(x!1))")
+
+

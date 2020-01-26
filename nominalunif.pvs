@@ -241,6 +241,10 @@ apply_sub_prb_lst_cons_calls_add: LEMMA
 cdr_smaller_size: LEMMA
 NOT null?(unif_prb_lst) => size_lst(cdr(unif_prb_lst)) < size_lst(unif_prb_lst)
 
+% size_lst(l1 + l2) = size_lst(l1) + size_lst(l2)
+size_lst_append: LEMMA
+    size_lst(append(unif_prb_lst1, unif_prb_lst2)) = size_lst(unif_prb_lst1) + size_lst(unif_prb_lst2)
+
 %%%%%%%%%% end of lemmas related to the auxiliar functions above
 c_unify(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst): RECURSIVE list[nominal_sol_typ] =
 % base case: if there is no problem left to unify, the solution given is good enough
