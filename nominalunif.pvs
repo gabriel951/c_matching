@@ -399,14 +399,21 @@ FORALL Delta_sol, sigma_sol, fix_pnt_eq_lst_sol:
 	valid_quint?(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst))
 	=> sol_prb_quint?(Nabla, sigma1)(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst)
 
+% soundness of unification
+c_unify_sound_cor: COROLLARY
+FORALL Delta_sol, sigma_sol, fix_pnt_eq_lst_sol:
+    member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify((::), (::), (::), (:(t, s):), (::)))
+    AND sol_prb_quint?(Nabla, sigma1)((::), Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol)
+	=> sol_prb_quint?(Nabla, sigma1)((::), (::), (::), (:(t, s):), (::))
+
 % soundness of matching 
-c_match_sound_cor: COROLLARY
+c_match_sound: COROLLARY
 FORALL Delta_sol, sigma_sol, fix_pnt_eq_lst_sol:
         (member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify(Vars(s), (::), (::), (:(t, s):), (::))) AND
         sol_prb_quint?(Nabla, sigma1)(Vars(s), Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol))
 	=> sol_prb_quint?(Nabla, sigma1)(Vars(s), (::), (::), (:(t, s):), (::))
 
-% completeness of c match - main theorem
+% completeness of unify with protected variables - main theorem
 c_match_complete: LEMMA
     sol_prb_quint?(Nabla, sigma1)(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) AND
     valid_quint?(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst) =>
@@ -414,13 +421,22 @@ c_match_complete: LEMMA
        member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify(prtc_vars, Delta, sigma, unif_prb_lst, fix_pnt_eq_lst))
 	AND sol_prb_quint?(Nabla, sigma1)(prtc_vars, Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol)
 
-% completeness of c match for the initial call of the algorithm 
-c_match_complete_cor: COROLLARY
-LET prtc_var = Vars(s) IN 
-    sol_prb_quint?(Nabla, sigma1)(prtc_var, (::), (::), (:(t, s):), (::)) =>
+% completeness of unification - empty set of protected variables
+c_unify_complete_cor: COROLLARY
+    sol_prb_quint?(Nabla, sigma1)((::), (::), (::), (:(t, s):), (::)) =>
     EXISTS Delta_sol, sigma_sol, fix_pnt_eq_lst_sol:
-       member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify(prtc_var, (::), (::), (:(t, s):), (::)) )
-       AND sol_prb_quint?(Nabla, sigma1)(prtc_var, Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol)
+       member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify((::), (::), (::), (:(t, s):), (::)))
+	AND sol_prb_quint?(Nabla, sigma1)((::), Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol)
+    
+% completeness of c match - set of protected variables = rhs 
+c_match_complete_cor: COROLLARY
+    sol_prb_quint?(Nabla, sigma1)(Vars(s), (::), (::), (:(t, s):), (::)) =>
+    EXISTS Delta_sol, sigma_sol, fix_pnt_eq_lst_sol:
+       member((Delta_sol, sigma_sol, fix_pnt_eq_lst_sol), c_unify(Vars(s), (::), (::), (:(t, s):), (::)))
+	AND sol_prb_quint?(Nabla, sigma1)(Vars(s), Delta_sol, sigma_sol, (::), fix_pnt_eq_lst_sol)
+    
+    
+
 %%%%%%%%%% end of specification of soundness and completeness of algorithm  
 
 
