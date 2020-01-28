@@ -7,6 +7,7 @@
 (name-replace "unif_prb_lst2_alg" "apply_sub_prb_lst(sigma1_alg, fix_pnt2unif_prb(x!2))")
 (name-replace "new_Delta_alg" "append(Delta1_alg, Delta)")
 (name-replace "new_unif_prb_lst_alg" "append(unif_prb_lst1_alg, unif_prb_lst2_alg)")
+
 (inst -1 "new_Delta_alg" "Nabla" "prtc_vars" "new_sigma_alg" "sigma1" "Delta_sol" "sigma_sol" "fix_pnt_eq_lst_sol")
 
 ## atoms
@@ -72,6 +73,6 @@ obs: assim que você nomear as coisas, já compensa provar que more_gen_sub?(Nab
 
 (name-replace "unif_prb1_2_alg" "(:(term1(c_arg(t_alg)), term2(c_arg(s_alg))):)")
 (name-replace "unif_prb2_1_alg" "(:(term2(c_arg(t_alg)), term1(c_arg(s_alg))):)")
-(name-replace "unif_prb_lst1_alg" "append(append(unif_prb1_1_alg, unif_prb2_2_alg), cdr(x!1))")
+(name-replace "unif_prb_lst2_alg" "append(append(unif_prb1_2_alg, unif_prb2_1_alg), cdr(x!1))")
 
 
